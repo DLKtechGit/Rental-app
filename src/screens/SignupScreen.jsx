@@ -150,7 +150,7 @@ const SignupScreen = () => {
               </Text>
               <Pressable>
                 <Text
-                  onPress={() => navigation.navigate('LoginScreen')}
+                  onPress={() => navigation.navigate("LoginScreen")}
                   style={{
                     textAlign: "center",
                     marginTop: 15,
