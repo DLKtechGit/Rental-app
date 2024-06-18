@@ -20,7 +20,7 @@ export default function BottomTab() {
         tabBarStyle: {
           marginBottom: 3,
           backgroundColor: Colors.white,
-          height: 70,
+          height: 50,
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,
           borderColor: Colors.secondary,
@@ -35,7 +35,7 @@ export default function BottomTab() {
             <Icons
               name="dashboard"
               color={focused ? Colors.secondary : Colors.primary}
-              size={30}
+              size={25}
             />
           ),
         }}
@@ -49,7 +49,7 @@ export default function BottomTab() {
             <Icons
               name="menu"
               color={focused ? Colors.secondary : Colors.primary}
-              size={30}
+              size={25}
             />
           ),
         }}
@@ -64,7 +64,7 @@ export default function BottomTab() {
             <Notify
               name="bell"
               color={focused ? Colors.secondary : Colors.primary}
-              size={30}
+              size={25}
             />
           ),
           tabBarBadge: 2,

@@ -82,7 +82,8 @@ const ForgotPassword = () => {
                 style={{
                   textAlign: "center",
                   marginTop: 15,
-                  color: Colors.primary,
+                  color: Colors.secondary,
+                  fontWeight:"bold"
                 }}
               >
                 Login

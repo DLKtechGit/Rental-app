@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function RentTabs() {
   const route = useRoute();
-  const { initialRouteName } = route.params || {
+  const { initialRouteName,property } = route.params || {
     initialRouteName: "Paid Rents",
   };
   return (
@@ -27,8 +27,12 @@ function RentTabs() {
         tabBarIndicatorStyle: { width: 200 },
       }}
     >
-      <Tab.Screen name="Upcoming Rents" component={UpcomingRents} />
-      <Tab.Screen name="Paid Rents" component={PaidRents} />
+      <Tab.Screen name="Upcoming Rents">
+        {(props)=> <UpcomingRents {...props} property={property}/>}
+      </Tab.Screen>
+      <Tab.Screen name="Paid Rents" component={PaidRents}/>
+        {/* {(props) => <PaidRents {...props} property={property} />} */}
+      {/* </Tab.Screen> */}
     </Tab.Navigator>
   );
 }

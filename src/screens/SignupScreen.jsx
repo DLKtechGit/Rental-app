@@ -36,17 +36,20 @@ const SignupScreen = () => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={{ marginTop: 50 }}>
+          <View>
           <Image
             style={styles.img}
             source={require("../assets/Images/signlogo.png")}
           />
+          </View>
+        
 
           <View style={styles.logtex}>
-            <Text style={{ fontSize: 15 }}> Hi there!</Text>
+            <Text style={{ fontSize: 15,color:Colors.secondary,fontWeight:"bold"}}> Hi there!</Text>
             <Text style={styles.logtexin}>Let's Get Started</Text>
           </View>
 
-          <View style={{ padding: 18 }}>
+          <View style={{padding:15}}>
             <View style={{ marginTop: 15 }}>
               <View style={styles.emailInp}>
                 <IconUser style={styles.icons} name="user" size={25} />
@@ -145,7 +148,7 @@ const SignupScreen = () => {
                 justifyContent: "center",
               }}
             >
-              <Text style={{ textAlign: "center", marginTop: 15 }}>
+              <Text style={{ textAlign: "center", marginTop: 15,color:Colors.gray }}>
                 Already have an account?
               </Text>
               <Pressable>
@@ -154,7 +157,9 @@ const SignupScreen = () => {
                   style={{
                     textAlign: "center",
                     marginTop: 15,
-                    color: Colors.primary,
+                    color: Colors.secondary,
+                    fontWeight:"bold"
+
                   }}
                 >
                   Login
@@ -176,11 +181,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent:"center"
   },
   img: {
-    width: 400,
+    width: "100%",
     height: 200,
   },
   logtex: {
@@ -231,3 +235,5 @@ const styles = StyleSheet.create({
 });
 
 export default SignupScreen;
+
+  // i want to build one application that application have  a two modules 1.admin and 2.parents that application is specially for the childerens that application normaly in the play store every one can able to install this application then login as a parent and then and fill the name and important details about the childeren  parents can able to discribe about our childeres dis ability like hadwritting is not comming properly the spoken is not comming prperly and mentally not strong and stable etc.. like this kind of irregular activitys form childrens and that parants can discribe about the childern and find a exact solution for that problem by this appliction this is usage for this application and then after Parents Concerned about our childrent then prents can able to attend simple assesment about the childrens problem they a some predefined questions form the applicaton parents can able to choose the following yes or no questions for that simple qrustion about our student for best treatmant and theropy  for that problem then show the assesment result to the parents and at the same time perfect Therapiesrecomended to the parets regording about the assesment result for that childers problem they have a perfect treatment and theropys for that and recomended a specific theropi for childers problem  that thyopy like a video actrivitis or meterials or images this a theropys that theropys then that application set the goal for that childerns  problem after that treatment application can assign a acctivities and video guide for childerns all that proceess are predefineded  children can go throw the video or meterials guide and give istroction to their childerns and follow that video for better result about that problem that goal of the video is full filling the parents about their childers promblem that video guide will solve the childrens problem if children and parents followd their videa guide instruction  and this is a major process and then completion of the video guide or meterial guide then show feedback to theri parents that application will show some qustions about the improvement of the childerns problem if children parents can answer the questions b ased on yes or no and give me some comments then application can genetate a repord cat based on the feedback result if that particular childeren got ta good improve ment that student can leave the goal the got a better result no need to follow more or else if childern did not got a improvement aplication can reassaigin the goal and activities and video guides and metetials based on the feedback result then chillderen can able to follow the instruction if once childern got a improvement then quite the proccess if children is not got improvement then again and agin they will continue to this proccess till got improvement 

@@ -15,6 +15,7 @@ import NotificationDetails from "./src/screens/NotificationDetails";
 import UpcomingRents from "./src/screens/UpcomingRents";
 import PaidRents from "./src/screens/PaidRents";
 import RentTabs from "./src/components/RentTabs";
+import RentPayedDetails from "./src/screens/RentPayedDetails";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -69,6 +70,7 @@ const App = () => {
         />
 
         <Stack.Screen name="Rent Details" component={RentTabs} />
+        <Stack.Screen name="Payed Details" options={{headerShown:false}} component={RentPayedDetails}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

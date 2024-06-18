@@ -37,7 +37,7 @@ export default function LoginScreen() {
           />
           <View style={styles.logtex}>
             <Text style={styles.logtexin}>Welcome Back!</Text>
-            <Text> Login to your account</Text>
+            <Text style={styles.subtext}> Login to your account</Text>
           </View>
 
           <View style={{ padding: 20 }}>
@@ -76,7 +76,8 @@ export default function LoginScreen() {
                   style={{
                     textAlign: "right",
                     marginRight: 10,
-                    color: Colors.primary,
+                    color: Colors.secondary,
+                    fontWeight:"500"
                   }}
                 >
                   {" "}
@@ -103,7 +104,7 @@ export default function LoginScreen() {
                 justifyContent: "center",
               }}
             >
-              <Text style={{ textAlign: "center", marginTop: 15 }}>
+              <Text style={{ textAlign: "center", marginTop: 15,color:Colors.gray }}>
                 New on our platform ?
               </Text>
               <Pressable onPress={() => navigation.navigate('SignupScreen')}>
@@ -111,7 +112,8 @@ export default function LoginScreen() {
                   style={{
                     textAlign: "center",
                     marginTop: 15,
-                    color: Colors.primary,
+                    color: Colors.secondary,
+                    fontWeight:"500"
                   }}
                 >
                   Create an account
@@ -133,11 +135,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
   },
   mainImg: {
-    width: 370,
+    width: "100%",
     height: 300,
   },
 
@@ -177,4 +178,8 @@ const styles = StyleSheet.create({
   icons: {
     color: Colors.primary,
   },
+  subtext:{
+    color:Colors.secondary,
+    fontWeight:"700"
+  }
 });

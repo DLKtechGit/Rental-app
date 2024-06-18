@@ -45,7 +45,10 @@ const ProfileScreen = () => {
       });
     } else if (label === "Paid Rents") {
       navigation.navigate("Rent Details", { initialRouteName: "Paid Rents" });
-    } else {
+    } else if (label === "Payment history"){
+      navigation.navigate("Payed Details")
+    }
+    else {
       console.log(`${label} pressed`);
     }
   };

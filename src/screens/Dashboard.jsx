@@ -1,92 +1,217 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  Dimensions,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Colors } from "../Constant"; // Assuming you have a Colors file
+import house from "../assets/Images/home.jpg";
+import store from "../assets/Images/shop.jpg";
+import { useNavigation } from "@react-navigation/native";
+import Carousel from "react-native-reanimated-carousel";
 
-function StatisticsScreen() {
+const rentdata = [
+  {
+    id: "1",
+    image: house,
+    date: "Thu, 23 July 2024",
+    property: "House1",
+    daysLeft: "20",
+    price: "3000",
+    paymentHistory: "39",
+    paidRent: "30",
+    upcomingRent: "15",
+  },
+  {
+    id: "2",
+    image: store,
+    date: "Thu, 10 June 2024",
+    property: "House2",
+    daysLeft: "10",
+    price: "4000",
+    paymentHistory: "39",
+    paidRent: "20",
+    upcomingRent: "13",
+  },
+  {
+    id: "3",
+    image: house,
+    date: "Thu, 02 May 2024",
+    property: "Shope1",
+    daysLeft: "30",
+    price: "5000",
+    paymentHistory: "29",
+    paidRent: "10",
+    upcomingRent: "11",
+  },
+  {
+    id: "4",
+    image: house,
+    date: "Thu, 02 May 2024",
+    property: "Shope2",
+    daysLeft: "30",
+    price: "5000",
+    paymentHistory: "29",
+    paidRent: "10",
+    upcomingRent: "11",
+  },
+];
+
+const StatisticsScreen = () => {
+  const navigation = useNavigation();
+  const width = Dimensions.get("window").width;
+
+  const images = [
+    {
+      image: require("../assets/Images/slider2.jpg"),
+    },
+    {
+      image: require("../assets/Images/slider4.jpg"),
+    },
+    {
+      image: require("../assets/Images/slider5.jpg"),
+    },
+    {
+      image: require("../assets/Images/slider6.jpg"),
+    },
+  ];
+
+  const handlenavigate = (property) => {
+    navigation.navigate("Rent Details", {
+      initialRouteName: "Upcoming Rents",
+      property,
+    });
+  };
+
+  const dataItems = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => handlenavigate(item.property)}
+        style={styles.card}
+      >
+        <View style={styles.header}>
+          <Text style={styles.headerText}>{item.property}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Rent Details")}>
+            <Text style={styles.headerLink}>{item.date}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.amountContainer}>
+          <View style={styles.amountSection}>
+            <Text style={styles.amountLabel}>Paid Rents</Text>
+            <Text style={styles.amountValue}>{item.paidRent}</Text>
+          </View>
+          <View style={styles.amountSection}>
+            <Text style={styles.amountLabel}>Upcoming Rent</Text>
+            <Text style={styles.amountValue}>{item.upcomingRent}</Text>
+          </View>
+          <View style={styles.amountSection}>
+            <Text style={styles.amountLabel}>Rent Amount</Text>
+            <Text style={styles.amountValue}>₹ {item.price}</Text>
+          </View>
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.overdueText}>
+            <Text style={styles.overdueDays}>{item.daysLeft} Days </Text> left
+            for payment
+          </Text>
+          <View>
+            <Text style={styles.makePayment}>MAKE PAYMENT</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text style={styles.headerText}>Dashboard</Text>
-      </View> */}
-
-      <View style={styles.profileContainer}>
-        <Image
-          source={require("../assets/Images/userimg1.jpg")}
-          style={styles.profileImage}
-        />
-        <View style={styles.profileDetails}>
-          <Text style={styles.name}>Eugene Griffin</Text>
-
-          <Text style={styles.details}> <Icon name="email"  /> &nbsp; eugenegriffin@gmail.com</Text>
-          <Text style={styles.status}> <Icon name="call"/> &nbsp; 87483483349 </Text>
-        </View>
-      </View>
-
-      <View style={styles.statsContainer}>
-        <View style={[styles.card, styles.elevation]}>
-          <Text style={styles.statNumber}>8</Text>
-          <Text style={styles.statLabel}>Total Paid Rents</Text>
-        </View>
-        <View style={[styles.card, styles.elevation]}>
-          <Text style={styles.statNumber}>10</Text>
-          <Text style={styles.statLabel}>Upcoming Rent</Text>
-        </View>
-        <View style={[styles.card, styles.elevation]}>
-          <Text style={styles.statNumber}>20,000</Text>
-          <Text style={styles.statLabel}>Total Amount</Text>
-        </View>
-      </View>
-
-      <View style={styles.bikeContainer}>
-        <Image
-          source={require("../assets/Images/home.jpg")}
-          style={styles.bikeImage}
-        />
-        <Text style={styles.date}>Thu, 23 July 2019</Text>
-        <View style={{flexDirection:"row"}}>
-        <Text style={styles.bikeDetails}>Rental  : </Text>
-        <Text style={styles.house} >House </Text>
-        </View>
-        <View style={styles.bikeStats}>
-            <View style={styles.daysLeft}>
-          <Text style={styles.bikeStat}>20</Text>
-          <Text style={styles.bikeStat}> Days left  </Text>
+      <View style={styles.fixedContent}>
+        <View style={styles.profileContainer}>
+          <Image
+            source={require("../assets/Images/userimg1.jpg")}
+            style={styles.profileImage}
+          />
+          <View style={styles.profileDetails}>
+            <Text style={styles.name}>Eugene Griffin</Text>
+            <Text style={styles.details}>
+              <Icon name="email" /> &nbsp; eugenegriffin@gmail.com
+            </Text>
+            <Text style={styles.status}>
+              <Icon name="call" /> &nbsp; 87483483349{" "}
+            </Text>
           </View>
-          <View style={styles.verticleLine}></View>
-          <View style={styles.daysLeft}>
-          <Text style={styles.bikeStat}>6000</Text>
-          <Text style={styles.bikeStat}> Price per month  </Text>
-          </View>   
-          <View style={styles.verticleLine}></View>       
-          <View style={styles.daysLeft}>
-          <Text style={styles.bikeStat}>163</Text>
-          <Text style={styles.bikeStat}> Payment History </Text>
-          </View>        
-          </View>
+        </View>
+
+        <View style={styles.carouselContainer}>
+          <Carousel
+            loop
+            width={width}
+            height={width / 2}
+            autoPlay={true}
+            data={images}
+            scrollAnimationDuration={1000}
+            renderItem={({ item }) => (
+              <View style={{ justifyContent: "center", paddingHorizontal: 10 }}>
+                <Image
+                  source={item.image}
+                  style={styles.sliderImg}
+                  resizeMode="cover"
+                />
+              </View>
+            )}
+          />
+        </View>
       </View>
+
+      <ScrollView  style={styles.scrollViewContent}>
+        <View style={styles.statscContainer}>
+          <View style={styles.leftLayout}>
+            <View style={styles.statsCard1}>
+              <Text style={styles.statsCount}>30</Text>
+              <Text style={styles.statsText}> Total Paid Rents</Text>
+            </View>
+
+            <View style={styles.statsCard2}>
+              <View>
+                <Text style={styles.statsCount}>₹ 20.k</Text>
+                <Text style={styles.statsText}> Outstanting Amount</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <FlatList
+          data={rentdata}
+          renderItem={dataItems}
+          keyExtractor={(item) => item.id}
+          style={{ marginTop: 10, paddingHorizontal: 10 }}
+        />
+        
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
   },
-  header: {
-    alignItems: "center",
-    marginTop: 40,
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: "bold",
+  fixedContent: {
+    backgroundColor: Colors.white,
   },
   profileContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    padding: 10,
+    backgroundColor: Colors.white,
+    height: 110,
   },
   profileImage: {
     width: 100,
@@ -100,127 +225,147 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
-    color:Colors.secondary
+    color: Colors.secondary,
   },
   details: {
     fontSize: 14,
     color: Colors.primary,
     marginLeft: 3,
     marginVertical: 3,
-    
   },
   status: {
     fontSize: 14,
     color: Colors.gray,
     marginLeft: 5,
   },
-  statsContainer: {
+  card: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+    padding: 15,
+    shadowColor: Colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+    marginTop: 20,
+    borderTopWidth: 1.5,
+    borderTopColor: Colors.borderColor,
+    borderLeftWidth: 1.5,
+    borderLeftColor: Colors.borderColor,
+    borderRightWidth: 1.5,
+    borderRightColor: Colors.borderColor,
+  },
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
-marginTop:20    
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.borderColor,
+    paddingBottom: 10,
   },
-  card: {  
-    backgroundColor: 'white',  
-    borderRadius: 8,  
-     width:115,
-     height:115,
-    marginTop: 20,  
-    justifyContent:"center",
-    gap:10
-  },  
-  elevation: {  
-    shadowColor: '#52006A',  
-    elevation: 20,  
-  },  
-  statNumber: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign:"center",
-  },
-  statLabel: {
-    fontSize: 14,
-    color: "#777",
-    textAlign:"center",
-},
-  bikeContainer: {
-    backgroundColor: "#F8EEF6",
-    borderRadius: 10,
-    // padding: 10,
-    marginTop:40,
-    height:380,
-    borderBottomLeftRadius:20,
-    borderBottomRightRadius:20
-  },
-  bikeImage: {
-    width: "100%",
-    height: 200,
-    borderRadius: 10,
-  },
-  date: {
+  headerText: {
     fontSize: 16,
     fontWeight: "bold",
-    marginVertical: 5,
-    color:Colors.primary,
-    marginLeft:10,
-    marginTop:10
+    color: Colors.black,
+    marginTop: 5,
   },
-  time: {
+  headerLink: {
     fontSize: 14,
-    color: "#777",
-  },
-  bikeDetails: {
-    fontSize: 14,
+    color: Colors.secondary,
     fontWeight: "bold",
-    marginLeft:10,
-    color:Colors.primary
+    marginTop: 5,
   },
-  price: {
-    fontSize: 14,
-    color: "orange",
-    marginVertical: 5,
-    color:Colors.white
-  },
-  bikeStats: {
+  amountContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
-    padding:10
-    // borderWidth:1
+    marginBottom: 10,
   },
-  bikeStat: {
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign:'center',
-    color:Colors.primary
-  },
-  bottomTab: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+  amountSection: {
     alignItems: "center",
-    height: 60,
-    backgroundColor: "#f9f9f9",
-    borderRadius: 30,
-    position: "absolute",
-    bottom: 20,
-    left: 10,
-    right: 10,
   },
-  house:{
-color:Colors.secondary,
-marginLeft:10,
-},
-  daysLeft:{
-    marginTop:25,
-},
-verticleLine:{
-    height: '70%',
-    width: 1,
-    backgroundColor: Colors.gray,
-    marginTop:25
+  amountLabel: {
+    fontSize: 14,
+    color: Colors.gray,
   },
-  bileheder:{
-    paddingLeft:10
-  }
+  amountValue: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.black,
+    marginTop: 15,
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: Colors.borderColor,
+    paddingTop: 15,
+  },
+  overdueText: {
+    fontSize: 14,
+    color: Colors.successColor,
+  },
+  overdueDays: {
+    fontWeight: "bold",
+  },
+  makePayment: {
+    fontSize: 14,
+    color: Colors.secondary,
+    fontWeight: "bold",
+  },
+  sliderImg: {
+    width: "100%",
+    height: 100,
+    borderRadius: 5,
+  },
+  carouselContainer: {
+    paddingVertical: 10,
+    marginBottom: 100,
+  },
+  scrollViewContent: {
+    flex: 1,
+    marginBottom: 10,
+  },
+  statscContainer: {
+    width: "100%",
+    padding: 15,
+    flexDirection: "column",
+    backgroundColor: Colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  leftLayout: {
+    gap: 10,
+    flexDirection: "row",
+  },
+  statsCard1: {
+    width: "50%",
+    height: 110,
+    paddingTop: 20,
+    backgroundColor:"#B9E0EC",
+    borderRadius: 20,
+  },
+  statsCard2: {
+    width: "50%",
+    height: 110,
+    paddingTop: 20,
+    backgroundColor: "#727474",
+    borderRadius: 20,
+  },
+  statsCount: {
+    color: Colors.white,
+    fontWeight: "bold",
+    fontSize: 25,
+    textAlign: "center",
+  },
+  statsText: {
+    color: Colors.white,
+    justifyContent: "center",
+    marginTop: 10,
+    fontWeight: "bold",
+    fontSize: 15,
+    textAlign: "center",
+  },
 });
 
 export default StatisticsScreen;
